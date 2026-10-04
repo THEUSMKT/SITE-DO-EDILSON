@@ -5,16 +5,16 @@
 >
 > | O quê | Valor atual (PLACEHOLDER) | Onde trocar |
 > |---|---|---|
-> | Nome do vinho | `Reserva Exclusiva` (nome de trabalho) | `config.js` → `nomeVinho` e o `<head>` do `index.html` |
+> | Nome do vinho | `Reserva Exclusiva` (nome de trabalho) | `config.js` → `nomeVinho` e o `<head>` dos dois `index.html` (o da prévia e o da raiz) |
 > | WhatsApp da loja | `5551981947979` | `config.js` → `whatsapp` |
 > | Instagram | `https://instagram.com/` | `config.js` → `instagram` |
 > | Facebook | `https://facebook.com/` | `config.js` → `facebook` |
-> | Nome da loja | `Nome da loja` | `config.js` → `nomeLoja` e `og:site_name` no `index.html` |
+> | Nome da loja | `Nome da loja` | `config.js` → `nomeLoja` e `og:site_name` nos dois `index.html` |
 > | Foto da garrafa | ainda não existe: a página usa a garrafa desenhada em SVG | colocar `assets/garrafa.png` |
 > | Imagem de compartilhamento | `assets/og-imagem.jpg` mostra o nome de trabalho e a garrafa em SVG | trocar o arquivo |
 > | Ficha técnica | desligada (não há dados reais) | `config.js` → `mostrarFichaTecnica` e `ficha` |
 > | Depoimentos | desligados (não há depoimentos reais) | `config.js` → `mostrarDepoimentos` e `depoimentos` |
-> | Endereço nas tags de compartilhamento | `https://theusmkt.github.io/SITE-DO-EDILSON/previas/vinho/` | `og:url` e `og:image` no `index.html` |
+> | Endereço nas tags de compartilhamento | `https://theusmkt.github.io/SITE-DO-EDILSON/previas/vinho/` | `og:url` e `og:image` nos dois `index.html` |
 
 Landing page de página única para vender um único vinho importado de marca exclusiva. Todo botão **Comprar** abre uma conversa no WhatsApp da loja com a mensagem pronta. Não há carrinho nem checkout: pagamento e entrega são combinados na conversa.
 
@@ -29,10 +29,14 @@ Landing page de página única para vender um único vinho importado de marca ex
 | `assets/favicon.svg` | Ícone da aba do navegador |
 | `assets/og-imagem.jpg` | Imagem que aparece quando o link é compartilhado (1200 × 630) |
 
+Na raiz do repositório, um `index.html` só redireciona o endereço curto do site para a prévia.
+
 ## Como ver a prévia
 
 **Online:** depois que o GitHub Pages estiver ligado (veja [Publicar](#publicar-no-github-pages)), o endereço é
 `https://theusmkt.github.io/SITE-DO-EDILSON/previas/vinho/`
+
+O endereço curto `https://theusmkt.github.io/SITE-DO-EDILSON/` também abre a prévia: o `index.html` da raiz redireciona na hora, mantendo parâmetros como `?utm_source=`.
 
 **No computador:** a página usa módulos JavaScript, que o navegador só carrega a partir de um servidor. Aberta com dois cliques no `index.html`, ela aparece inteira, mas sem animações e com os botões de compra sem o link do WhatsApp. Para ver tudo funcionando:
 
@@ -63,9 +67,9 @@ Abra o `config.js`, troque o valor entre aspas e salve. A página se atualiza so
 
 Mantenha as aspas, as vírgulas no fim de cada linha e o `true`/`false` sem aspas.
 
-### Quando o nome real chegar, troque também no `index.html`
+### Quando o nome real chegar, troque também nos dois `index.html`
 
-WhatsApp, Facebook e Google leem o começo do `index.html` antes de qualquer JavaScript rodar. Por isso, além do `config.js`, atualize estas linhas no `<head>`:
+WhatsApp, Facebook e Google leem o começo do `index.html` antes de qualquer JavaScript rodar. Por isso, além do `config.js`, atualize estas linhas no `<head>` do `index.html` da prévia **e** do `index.html` da raiz do repositório (o do redirecionamento):
 
 - `<title>` e `og:title`: troque `Reserva Exclusiva` pelo nome real;
 - `og:site_name`: troque `Nome da loja`;
@@ -116,7 +120,7 @@ depoimentos: [
 
 1. No GitHub, abra o repositório → **Settings** → **Pages**.
 2. Em **Build and deployment**, escolha **Deploy from a branch**, a branch **main** e a pasta **/(root)**. Salve.
-3. Depois do merge na `main`, a prévia fica em `https://theusmkt.github.io/SITE-DO-EDILSON/previas/vinho/` (leva um ou dois minutos).
+3. Depois do merge na `main`, a prévia fica em `https://theusmkt.github.io/SITE-DO-EDILSON/previas/vinho/`, e o endereço curto `https://theusmkt.github.io/SITE-DO-EDILSON/` redireciona para ela (leva um ou dois minutos).
 
 Se a pasta for copiada para outro repositório (por exemplo, `Matheus-Performance`), copie `previas/vinho/` inteira e troque o endereço em `og:url` e `og:image` no `index.html`.
 
@@ -139,5 +143,5 @@ Se a pasta for copiada para outro repositório (por exemplo, `Matheus-Performanc
 - [x] Ficha técnica e depoimentos estão ocultos por flag.
 - [x] A garrafa funciona em SVG e é trocável por foto.
 - [x] Animações desligam com `prefers-reduced-motion: reduce`.
-- [x] `noindex` presente e nenhum outro arquivo do repositório foi alterado.
+- [x] `noindex` presente (também no redirecionamento da raiz) e nenhum arquivo existente fora de `previas/vinho/` foi alterado. O `index.html` da raiz foi criado depois, a pedido, só para redirecionar para a prévia.
 - [x] Testado em 390 × 844 e 1440 × 900 (e também em 320, 360, 430, 768 e 1024 px de largura).
